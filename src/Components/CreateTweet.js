@@ -101,7 +101,6 @@ class CreateTweet extends React.Component {
       await this.tweetPostDb();
       await this.userPostDb();
     }
-    event.target.value = '';
 
   }
 
