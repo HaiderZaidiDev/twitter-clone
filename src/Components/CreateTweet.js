@@ -1,5 +1,4 @@
 import '../index.css';
-import Avatar from './avatar.svg'
 import React, {Component} from 'react';
 
 // Firebase

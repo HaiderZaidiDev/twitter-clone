@@ -1,5 +1,4 @@
 import '../index.css';
-import Avatar from './avatar.svg'
 import React, {Component} from 'react';
 // Bootstap
 import Row from 'react-bootstrap/Row';

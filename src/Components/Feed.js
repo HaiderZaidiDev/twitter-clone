@@ -1,5 +1,4 @@
 import '../index.css';
-import Avatar from './avatar.svg'
 import Tweet from './Tweet'
 import React, {Component} from 'react';
 

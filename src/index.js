@@ -7,6 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import CreateTweet from './Components/CreateTweet';
 import Sidebar from './Components/Sidebar';
 import Feed from './Components/Feed'
+import SignIn from './Components/Signin'
 
 // Bootstrap
 import Container from 'react-bootstrap/Container';
@@ -17,17 +18,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import firebase from './Components/Firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
-function SignIn() {
-  /* Firebase Google Sign in */
-  const signInWithGoogle= () => {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    firebase.auth().signInWithRedirect(provider)
-  }
-
-  return (
-    <button onClick={signInWithGoogle}> Sign in with Google.</button>
-  );
-}
 
 function Home(props) {
   /* Returns home page of the app. */
