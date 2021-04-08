@@ -1,11 +1,17 @@
 import '../index.css';
 import React, {Component} from 'react';
 
+//Firebase
+import firebase from './Firebase';
+
 // Bootstap
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 class Sidebar extends React.Component {
+  SignOut() {
+    firebase.auth().signOut()
+  }
   render() {
     return (
       <Col className="col-lg-2 col-md-2 d-none d-md-block ">
@@ -13,18 +19,16 @@ class Sidebar extends React.Component {
           <Row className="row">
             <i className="fab fa-twitter" id="logo"></i>
           </Row>
-          {/*
           <div className="sidebar-item">
-            <Row className="row align-items-center">
-              <i className="fas fa-home d-flex justify-content-center"></i><h2> Home </h2>
+            <Row className="align-items-center">
+              <a href="https://github.com/HaiderZaidiDev/twitter-clone"><h2> Github </h2></a>
             </Row>
           </div>
           <div className="sidebar-item">
-            <Row className="row align-items-center">
-              <i className="fas fa-user d-flex justify-content-center"></i><h2> Profile </h2>
+            <Row className="align-items-center">
+              <a href="#" onClick={this.SignOut}><h2> Signout</h2></a>
             </Row>
           </div>
-          */}
         </div>
       </Col>
 

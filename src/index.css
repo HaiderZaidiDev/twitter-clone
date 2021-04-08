@@ -54,11 +54,19 @@ p {
 }
 
 .sidebar h2 {
-  margin-left: 1.5vw;
+  margin-left: 0vw;
+  padding-top: 2.5vh;
 }
 
 .sidebar-item {
-  padding-top: 5vh;
+  padding-top: 1.5vh;
+}
+
+.sidebar-item a {
+  color: black;
+}
+.sidebar-item a:hover {
+  color: #1DA1F2;
 }
 
 /* Create Tweet */
@@ -182,8 +190,13 @@ input:focus {
     width: 100%;
   }
   .tweet-box {
-    padding-top: 1vh;
+    padding-left: 3.5vw;
+    padding-top: 1.5vh;
     padding-bottom: 1vh;
+  }
+  .tweet-body {
+    margin-left: 5.5vw;
+    margin-top: 1vh;
   }
 
 }

@@ -4,6 +4,8 @@ import React, {Component} from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
+import Linkify from 'react-linkify';
+
 import firebase from './Firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 const db = firebase.firestore();
@@ -31,6 +33,7 @@ class Tweet extends React.Component {
       // Incrementing the like count in the db.
       var currentLikes = currentTweet.data().likes;
       var likes = currentLikes + 1
+
 
       /* Not possible to push directly to firebase arrays, so we create a
       / new array with the user's name it. */
@@ -84,7 +87,7 @@ class Tweet extends React.Component {
             <div className="tweet-body">
               <Row>
                   <p className="tweet-user"> {this.props.displayName} <span className="secondary">@{this.props.username}</span></p>
-                  <p className="tweet-msg"> {this.props.message}</p>
+                  <Linkify><p className="tweet-msg"> {this.props.message}</p></Linkify>
                   <div className="tweet-icons">
                     <i onClick={this.retweetTweet} className="fas fa-retweet" id="retweet"></i><span className="count">{this.props.retweets}</span>
                     <i onClick={this.likeTweet} className="far fa-heart" id="like" ></i> <span className="count">{this.props.likes}</span>
