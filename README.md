@@ -14,11 +14,13 @@ Stack:
 
 ## Features
 - Firebase Google OAuth2 Authentication
-- Create and view tweets (rendered in real-time from Firestore documents using a React hook).
-- Spam filter on creating tweets (ensures a 15-second delay between tweets).
+- Create and view tweets (rendered in real-time from Firestore documents using React hooks).
+- Like and retweet tweets: prevents tweets from being liked/retweeted more than once by the same user.
+- Spam filter on creating tweets: ensures a 15-second delay between tweets.
 
 ## Installation
 You can install the app by cloning the repository, and starting a server with npm. You will need to create your own database solution, I used firebase.
+
 ```
 git clone https://github.com/HaiderZaidiDev/twitter-clone
 npm install react-bootstrap
