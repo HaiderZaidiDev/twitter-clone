@@ -1,12 +1,19 @@
 # twitter-clone
 
 ## Description
-A clone of the social media platform, Twitter, with a few personal design twists. 
+Have you ever dreamed of having your own personal social media platform, like Twitter, without all the nuances (i.e. the people on there) that come with it? Here you go!
 
-## Visuals
-The mockup I'll be working off of for the project, created in Figma. Of course, as time goes on, I will invetiablly mockup new features (and implement them), albeit, this is great base for the feed portion of the web-app. 
-### Feed Page 
-[![Figma Mockup](https://i.imgur.com/id0bH8j.png)](https://www.figma.com/file/viLMXkrAs8lbXfZ3q3114a/Twitter-Clone?node-id=1%3A2)
+I created this project to learn more about React and Firebase Auth/firestore (as such, I may have overcommented on somethings for personal notes) - also because I thought it was cool to say I made a Twitter. 
+
+Stack: 
+- Front-end: React.js, Bootstrap, HTML/CSS
+- Back-end: Firebase (OAuth2 & FireStore), Node.js 
+
+
+## Features
+- Firebase Google OAuth2 Authentication
+- Create and view tweets (rendered in real-time from Firestore documents using a React hook).
+- Spam filter on creating tweets (ensures a 15-second delay between tweets).
 
 ## Installation 
 You can install the app by cloning the repository, and starting a server with npm. You will need to create your own database solution, I used firebase.
@@ -22,3 +29,5 @@ npm start
 I'll be working on this for the next few weeks, most of the front-end design for the feed is done (HTML/CSS), what remains, is implementing it via React, and linking it to a backend. 
 - [X] Front-end: React.js, Bootstrap, HTML/CSS
 - [X] Back-end: Firebase (OAuth2 & Firestore), Node.js 
+- [ ] Create a sign-in page (currently, it's just a button). 
+- [ ] Create user profile pages, and a following system.
