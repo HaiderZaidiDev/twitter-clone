@@ -1,7 +1,7 @@
 # twitter-clone
 
 ## Description
-Have you ever dreamed of having your own personal social media platform, like Twitter, without all the nuances (i.e. the people on there) that come with it, here you go!
+Have you ever dreamed of having your own personal social media platform, like Twitter, without all the nuances (i.e. the people on there) that come with it? Here you go!
 
 I created this project to learn more about React and Firebase Auth/firestore (as such, I may have overcommented on somethings for personal notes) - also because I thought it was cool to say I made a Twitter. 
 
