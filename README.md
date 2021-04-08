@@ -5,7 +5,7 @@ Have you ever dreamed of having your own personal social media platform, like Tw
 
 Currently live at: [haiderzaidi.ca/twitter-react](https://haiderzaidi,ca/twitter-react)
 
-I created this project to learn more about React and Firebase Auth/irestore (as such, I may have over-commented on somethings for personal notes) - also because I thought it was cool to say I made a Twitter.
+I created this project to learn more about React and Firebase Auth/firestore (as such, I may have over-commented on somethings for personal notes) - also because I thought it was cool to say I made a Twitter.
 
 Stack:
 - Front-end: React.js, Bootstrap, HTML/CSS
