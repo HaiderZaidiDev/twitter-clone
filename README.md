@@ -29,5 +29,5 @@ npm start
 I'll be working on this for the next few weeks, most of the front-end design for the feed is done (HTML/CSS), what remains, is implementing it via React, and linking it to a backend. 
 - [X] Front-end: React.js, Bootstrap, HTML/CSS
 - [X] Back-end: Firebase (OAuth2 & Firestore), Node.js 
-- [] Create a sign-in page (currently, it's just a button). 
-- [] Create user profile pages, and a following system.
+- [ ] Create a sign-in page (currently, it's just a button). 
+- [ ] Create user profile pages, and a following system.
