@@ -34,12 +34,12 @@ class CreateTweet extends React.Component {
     /* Checks the last time the user tweeted, to prevent spam tweets. */
     const docRef = db.collection('users').doc(uid);
     var currentUser = await docRef.get();
-    const lastPosted = await currentUser.data().lastPosted;
-    lastPostedDate = lastPosted.toDate();
+    var lastPosted = await currentUser.data().lastPosted;
+    var lastPostedDate = lastPosted.toDate();
     var currentTime = new Date();
     var elapsedTime = Math.abs(currentTime - lastPostedDate)/1000
 
-    if(elapsedTime <= 10) {
+    if(elapsedTime <= 15) {
       const remainingToPost = 15 - elapsedTime;
       alert("You're posting to fast! Try again in: " +  remainingToPost + " seconds.")
       return false
@@ -91,12 +91,13 @@ class CreateTweet extends React.Component {
       retweetedBy: [],
     }
     console.log(tweetData)
-    this.setState({message:''})
     await docRef.set(tweetData);
   }
 
   async handleSubmit(event) {
-    const spamFilter = await this.spamFilter();
+    event.preventDefault(); // Must always be at top.
+    var spamFilter = await this.spamFilter();
+    console.log("Spam filter: " + spamFilter)
     if(spamFilter) {
       await this.tweetPostDb();
       await this.userPostDb();

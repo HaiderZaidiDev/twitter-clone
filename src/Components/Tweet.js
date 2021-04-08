@@ -75,7 +75,7 @@ class Tweet extends React.Component {
 
   render() {
     return (
-      <div class="tweet">
+      <div className="tweet">
         <Row>
           <Col lg={1} md={1}>
             <img src={this.props.photoURL} className="avatar"></img>

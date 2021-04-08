@@ -10,6 +10,8 @@
 
 # production
 /build
+/src/Components/twitter-clone-310015-945b735d4912.json
+/src/Components/Firebase.js
 
 # misc
 .DS_Store

@@ -29,7 +29,7 @@ const Feed = () => {
   }
 
   return(
-    <div class="feed">
+    <div className="feed">
       {/* Using conditional rendering and mapping, to render out tweets.
         Here, we use mapping to go through each element, and create a tweet component. */}
 
