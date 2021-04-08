@@ -13,7 +13,7 @@ You can install the app by cloning the repository, and starting a server with np
 ```
 git clone https://github.com/HaiderZaidiDev/twitter-clone 
 npm install react-bootstrap
-npm install react-firebase-hooks/aut
+npm install react-firebase-hooks/auth
 npm install firebase
 npm start
 ```
