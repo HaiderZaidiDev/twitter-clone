@@ -25,7 +25,6 @@ class CreateTweet extends React.Component {
 
   handleChange(event) {
     this.setState({message: event.target.value});
-    console.log(this.props.user.displayName);
   }
 
   async spamFilter() {
@@ -95,12 +94,14 @@ class CreateTweet extends React.Component {
 
   async handleSubmit(event) {
     event.preventDefault(); // Must always be at top.
-    var spamFilter = await this.spamFilter();
+    //var spamFilter = await this.spamFilter();
+    var spamFilter = true
     console.log("Spam filter: " + spamFilter)
     if(spamFilter) {
       await this.tweetPostDb();
       await this.userPostDb();
     }
+    event.target.value = '';
 
   }
 
@@ -108,11 +109,9 @@ class CreateTweet extends React.Component {
     return (
       <div className="create-tweet">
         <Row className="align-items-center">
-          <Col lg={1} md={1}>
             <img src={this.props.user.photoURL} className="avatar"></img>
-          </Col>
-          <Col lg={6} md={6} className="d-flex justify-content-start" style={{padding:0}}>
-            <form className="tweet-box" onSubmit={this.handleSubmit}>
+          <Col lg={6} md={6} className="d-flex justify-content-start no-padding">
+            <form className="tweet-box no-padding" onSubmit={this.handleSubmit}>
               <input type='text' placeholder={"Hey " + this.props.user.displayName + ", what's happening?"} onChange={this.handleChange}/>
             </form>
           </Col>

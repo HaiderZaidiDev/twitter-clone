@@ -1,5 +1,7 @@
 import '../index.css';
 import React, {Component} from 'react';
+
+import elapsedTime from './CreateTweet'
 // Bootstap
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -12,14 +14,51 @@ const db = firebase.firestore();
 
 class Tweet extends React.Component {
   /* Renders the tweet component, where the data of the tweet is derived from props. */
-  // Get the doc id, add to db.
   constructor(props) {
     super(props);
+    this.state = (
+      {
+        time:'',
+      }
+    );
+    // Unpacking the promise, given by elapsedTime.
+    this.elapsedTime().then((time) => {
+      var result = Math.round(time/60)
+      if (result > 86400 ) {
+        result = `${Math.round(result/86400)}d`
+
+      }
+      if (result > 60) {
+        result = `${Math.round(result/60)}h`
+      }
+      else if (result < 60) {
+        result = `${result}m`
+      }
+      this.setState({time:result});
+      //this.forceUpdate();
+
+    })
     this.likeTweet = this.likeTweet.bind(this);
     this.retweetTweet = this.retweetTweet.bind(this);
+    this.elapsedTime = this.elapsedTime.bind(this);
+
+
   }
 
   /* To-do: Find a way to combine likeTweet and retweetTweet into one function. */
+
+  async elapsedTime() {
+    /* Calculates elapsed time between now, and time a tweet was posted. */
+    const docRef = db.collection('tweets').doc(this.props.tweetId);
+    console.log("Tweetid: " + this.props.tweetId)
+    console.log(docRef.id)
+    var tweet = await docRef.get();
+    var tweetCreatedAt = await tweet.data().createdAt;
+    var tweetCreatedAtDate = tweetCreatedAt.toDate();
+    var currentTime = new Date();
+    var elapsedTime = Math.abs(currentTime - tweetCreatedAtDate)/1000
+    return elapsedTime
+  }
 
   async likeTweet() {
     const uid = firebase.auth().currentUser.uid;
@@ -79,14 +118,13 @@ class Tweet extends React.Component {
     return (
       <div className="tweet">
         <Row>
-          <Col lg={1} md={1}>
+          <div className="avatar-wrapper">
             <img src={this.props.photoURL} className="avatar"></img>
-          </Col>
-
-          <Col lg={6} md={6}>
+          </div>
+          <Col lg={6} md={6} className="no-padding">
             <div className="tweet-body">
               <Row>
-                  <p className="tweet-user"> {this.props.displayName} <span className="secondary">@{this.props.username}</span></p>
+                  <p className="tweet-user"> {this.props.displayName} <span className="secondary">@{this.props.username} · {this.state.time}</span></p>
                   <Linkify><p className="tweet-msg"> {this.props.message}</p></Linkify>
                   <div className="tweet-icons">
                     <i onClick={this.retweetTweet} className="fas fa-retweet" id="retweet"></i><span className="count">{this.props.retweets}</span>

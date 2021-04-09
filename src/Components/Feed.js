@@ -41,7 +41,8 @@ const Feed = () => {
             username={tweet.username}
             message={tweet.message}
             retweets={tweet.retweets}
-            likes={tweet.likes}/>
+            likes={tweet.likes}
+            elapsedTime={tweet.elapsedTime}/>
         ))
       )}
     </div>

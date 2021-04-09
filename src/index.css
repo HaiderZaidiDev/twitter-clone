@@ -24,9 +24,20 @@ p {
   font-weight: 400;
 }
 
+.row {
+  margin: 0 !important;
+}
+
+.col {
+  padding: 0 !important;
+}
 
 .secondary {
   color: #9B9B9B;
+}
+
+span.secondary {
+  font-weight: 300;
 }
 
 /** Main **/
@@ -94,10 +105,11 @@ form {
   border: none;
   outline: none;
   width: 100%;
-  margin-left: 0.5vw;
+  margin-left: 1vw;
 
 }
 .tweet-box input[type="text"] {
+  padding: 0;
   border: none;
   font-family: 'Inter';
   font-weight: 300;
@@ -138,14 +150,16 @@ input:focus {
 .tweet-user {
   font-family: 'Inter';
   font-weight: 500;
+  margin-bottom: 0.25vh;
 }
 .tweet-body {
   font-family: 'Inter';
   font-weight: 300;
-  margin-left: 0.5vw;
+  margin-left: 1vw;
 }
 
 .tweet-msg {
+  margin-bottom: 0.25vh;
   min-width: 100%;
 }
 .tweet-icons {
@@ -183,6 +197,10 @@ input:focus {
 
 /* Media Queries */
 @media only screen and (max-width: 600px) {
+  .no-padding {
+    padding: 0 !important;
+  }
+
   .create-tweet {
     width: 100%;
   }
@@ -191,12 +209,12 @@ input:focus {
   }
   .tweet-box {
     padding-left: 3.5vw;
-    padding-top: 1.5vh;
-    padding-bottom: 1vh;
+    margin-top: 2.5vh;
+    margin-bottom: 1vh;
   }
   .tweet-body {
-    margin-left: 5.5vw;
-    margin-top: 1vh;
+    margin-left: 0vw;
+    margin-top: 1.25vh;
   }
 
 }
