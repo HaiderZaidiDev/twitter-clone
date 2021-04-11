@@ -71,6 +71,7 @@ const Feed = () => {
       {snapshot && (
         tweetsArray.map((tweet) => (
           <Tweet
+            tweet={tweet.tweetId}
             photoURL={tweet.photoURL}
             displayName={tweet.displayName}
             username={tweet.username}
