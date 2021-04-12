@@ -38,6 +38,7 @@ function Home(props) {
 }
 
 function App() {
+  /* Returns the app. */
   /* Monitors the auth state using react-firebase-hooks.
    https://github.com/csfrequency/react-firebase-hooks/tree/aeadd15b3f8ca642f52776edf2e4dad62a00d449/auth */
 

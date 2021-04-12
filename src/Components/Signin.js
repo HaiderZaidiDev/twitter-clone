@@ -10,8 +10,9 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 function SignIn() {
-  /* Firebase Google Sign in */
+  /* Displays the pre-sign in page, prompting the user to sign in with Google. */
   const signInWithGoogle = () => {
+    /* Firebase Google OAuth2 Login */
     const provider = new firebase.auth.GoogleAuthProvider();
     firebase.auth().signInWithRedirect(provider)
   }

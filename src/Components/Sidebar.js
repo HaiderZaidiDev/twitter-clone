@@ -9,6 +9,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 class Sidebar extends React.Component {
+  /* Renders the sidebar */
   SignOut() {
     firebase.auth().signOut()
   }

@@ -13,9 +13,10 @@ import Col from 'react-bootstrap/Col';
 const db = firebase.firestore();
 
 const Feed = () => {
-  /* Using a hook to fecth tweets from the firestore, in descending order */
+  /* Displays a feed of all the tweets stored in the database, using hooks. */
+
   var elapsedTime = async (id) => {
-    /* Calculates elapsed time between now, and time a tweet was posted. */
+    /* Determining the time past since the tweet was posted. */
     // Fetching tweet.
     const docRef = db.collection('tweets').doc(id);
     var tweet = await docRef.get();
@@ -44,7 +45,7 @@ const Feed = () => {
     }
     catch(err) {
       // Usually if tweet is invalid because there is no createdAt.
-      console.log("No elapsed time!")
+      console.log("Error: No elapsed time!")
 
     }
   }
@@ -71,15 +72,13 @@ const Feed = () => {
       {snapshot && (
         tweetsArray.map((tweet) => (
           <Tweet
-            tweet={tweet.tweetId}
+            tweetId={tweet.tweetId}
             photoURL={tweet.photoURL}
             displayName={tweet.displayName}
             username={tweet.username}
             message={tweet.message}
             retweets={tweet.retweets}
-            likes={tweet.likes}
-            time={tweet.time}
-            elapsedTime={tweet.elapsedTime}/>
+            likes={tweet.likes}/>
         ))
       )}
     </div>

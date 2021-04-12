@@ -24,6 +24,7 @@ class Tweet extends React.Component {
 
   async likeTweet() {
     const uid = firebase.auth().currentUser.uid;
+    console.log(this.props.tweetId)
     const docRef = db.collection('tweets').doc(this.props.tweetId);
     var currentTweet = await docRef.get();
     var currentLikedBy = await currentTweet.data().likedBy;
@@ -50,6 +51,7 @@ class Tweet extends React.Component {
   }
 
   async retweetTweet() {
+    /* Handles retweets */
     const uid = firebase.auth().currentUser.uid;
     const docRef = db.collection('tweets').doc(this.props.tweetId);
     var currentTweet = await docRef.get();

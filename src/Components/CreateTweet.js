@@ -1,5 +1,5 @@
 import '../index.css';
-import React, {Component} from 'react';
+import React, {Component, useState} from 'react';
 
 // Firebase
 import firebase from './Firebase';
@@ -7,20 +7,43 @@ import firebase from './Firebase';
 // Bootstap
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Alert from 'react-bootstrap/Alert';
+import Button from 'react-bootstrap/Button';
 
 const db = firebase.firestore();
+
+function AlertDismissible(props) {
+  /* Returns alert (upon spam detection), and time remaining to post.  */
+  const [show, setShow] = useState(true);
+
+  if (show) {
+      return (
+        <Alert variant="danger" onClose={() => setShow(false)} dismissible>
+          <Alert.Heading>You're making tweets to fast!</Alert.Heading>
+          <p>
+            Please try again in {props.remainingToPost} seconds.
+          </p>
+        </Alert>
+      );
+  }
+  // Note: We need to return an empty div here, as otherwise, there is
+  // no return value, and an error is thrown.
+  return <div></div>;
+}
+
 class CreateTweet extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       message: '',
+      spam: false,
+      remainingToPost: 0,
     };
 
     // Binding handle submit to the class.
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.tweetPostDb = this.tweetPostDb.bind(this);
-
   }
 
   handleChange(event) {
@@ -28,31 +51,39 @@ class CreateTweet extends React.Component {
   }
 
   async spamFilter() {
+    /* Spam filter, to ensure tweets from the user are not within < 15 seconds
+    of eachother. */
+
+    // Fetching the user's profile.
     const uid = firebase.auth().currentUser.uid;
-    /* Checks the last time the user tweeted, to prevent spam tweets. */
     const docRef = db.collection('users').doc(uid);
     var currentUser = await docRef.get();
-    var lastPosted = await currentUser.data().lastPosted;
-    var lastPostedDate = lastPosted.toDate();
+    var lastPosted = await currentUser.data().lastPosted; //
+    var lastPostedDate = lastPosted.toDate(); // Timestamp of previous post.
     var currentTime = new Date();
+
+    // Elapsed time since current attempted tweet, and last tweet.
     var elapsedTime = Math.abs(currentTime - lastPostedDate)/1000
 
     if(elapsedTime <= 15) {
+      // Spam was detected.
       const remainingToPost = 15 - elapsedTime;
-      alert("You're posting to fast! Try again in: " +  remainingToPost + " seconds.")
-      return false
+      this.setState(
+        {
+          spam:true,
+          remainingToPost:remainingToPost
+        }
+      );
     }
     else {
-      return true
+      // Spam was not detected.
+      this.setState({spam:false})
     }
-
-
-    console.log("Elapsed time: " + elapsedTime)
   }
 
   async userPostDb() {
+    /* Posts the user's profile, and the time of their last tweet to the database. */
     const uid = firebase.auth().currentUser.uid;
-    /* Posts the user's profile to the db. */
     const docRef = db.collection('users').doc(uid);
     const doc = await docRef.get()
 
@@ -71,10 +102,11 @@ class CreateTweet extends React.Component {
   }
 
   async tweetPostDb() {
-    /* Posted the created tweet to the firestore database. */
+    /* Posts the created tweet to the database. */
+
+    // Fetching the tweets collection.
     const docRef = db.collection('tweets').doc();
     const username = this.props.user.displayName.toLowerCase().replace(' ', '')
-    console.log("The id of the tweet just created is: " + docRef.id)
 
     const tweetData = {
       tweetId: docRef.id,
@@ -88,16 +120,15 @@ class CreateTweet extends React.Component {
       likedBy: [],
       retweetedBy: [],
     }
-    console.log(tweetData)
     await docRef.set(tweetData);
   }
 
   async handleSubmit(event) {
-    event.preventDefault(); // Must always be at top.
-    //var spamFilter = await this.spamFilter();
-    var spamFilter = true
-    console.log("Spam filter: " + spamFilter)
-    if(spamFilter) {
+    /* Handling form submission. */
+    event.preventDefault(); // Prevents page reload, note: must be at top.
+
+    var spamFilter = await this.spamFilter(); // Returns true if spam detected.
+    if(!this.state.spam) {
       await this.tweetPostDb();
       await this.userPostDb();
     }
@@ -106,6 +137,8 @@ class CreateTweet extends React.Component {
   render() {
     return (
       <div className="create-tweet">
+        {/* Conditionally rendering the alert message, if spam was detected. */}
+        {this.state.spam ? <AlertDismissible remainingToPost={this.state.remainingToPost}/>:<div></div>}
         <Row className="align-items-center">
             <img src={this.props.user.photoURL} className="avatar"></img>
           <Col lg={6} md={6} className="d-flex justify-content-start no-padding">
@@ -118,6 +151,7 @@ class CreateTweet extends React.Component {
           <input className="tweet-button" type="submit" value="Tweet" onClick={this.handleSubmit}/>
         </Row>
       </div>
+
     );
   }
 }
