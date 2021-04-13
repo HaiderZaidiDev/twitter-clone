@@ -11,7 +11,7 @@ Stack:
 - Front-end: React.js, Bootstrap, HTML/CSS
 - Back-end: Firebase (OAuth2 & FireStore), Node.js
 
-![Demo](https://i.imgur.com/LvVBTrc.gif)
+![Demo](https://i.imgur.com/Tfut19K.gif)
 
 
 ## Features
